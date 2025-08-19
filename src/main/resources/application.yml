@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: mega-prod-java
+  datasource:
+    url: jdbc:h2:mem:megadb;DB_CLOSE_DELAY=-1;MODE=PostgreSQL
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+  mail:
+    host: 127.0.0.1
+    port: 3025
+    username:
+    password:
+    properties:
+      mail.smtp.auth: false
+      mail.smtp.starttls.enable: false
+
+kafka:
+  bootstrap-servers: ${spring.embedded.kafka.brokers:localhost:9092}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+server:
+  port: 8080
+
+app:
+  jwt:
+    secret: "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF"
+    expiryMs: 86400000
+  storage:
+    root: ${java.io.tmpdir}/uploads
