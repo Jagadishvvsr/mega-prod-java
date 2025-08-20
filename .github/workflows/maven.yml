@@ -72,8 +72,10 @@ jobs:
        - name: upload integration/unit test
          if: always()
          uses: actions/upload-artifact@v4
-         with: |
-           targets/surefire-reports/**
-           targets/failsafe-reports/**
-         
+         with: 
+          name: test reports
+          path: |
+            target/surefire-reports/**
+            target/failsafe-reports/**
+          retention-days: 7
   
