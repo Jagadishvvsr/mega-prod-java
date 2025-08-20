@@ -47,7 +47,7 @@ jobs:
         retention-days: 7
 
     - name: upload test reports
-      if: fail()
+      if: failure()
       uses : actions/upload-artifact@v4
       with:
        name: test reports
@@ -77,5 +77,7 @@ jobs:
           path: |
             target/surefire-reports/**
             target/failsafe-reports/**
+            target/jacoco.exec/**
+            target/jacoco.exec
           retention-days: 7
   
