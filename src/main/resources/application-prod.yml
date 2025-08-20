@@ -3,20 +3,15 @@ spring:
     url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/megadb}
     username: ${SPRING_DATASOURCE_USERNAME:app}
     password: ${SPRING_DATASOURCE_PASSWORD:secret}
-    driverClassName: org.postgresql.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: validate
+    properties:
+      hibernate.jdbc.time_zone: UTC
   flyway:
     enabled: true
 
-app:
-  jwt:
-    secret: ${APP_JWT_SECRET}
-  storage:
-    root: ${APP_STORAGE_ROOT:/var/app/uploads}
-  # email
-spring:
   mail:
     host: ${SMTP_HOST}
     port: ${SMTP_PORT:587}
@@ -26,5 +21,18 @@ spring:
       mail.smtp.auth: true
       mail.smtp.starttls.enable: true
 
-kafka:
-  bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+app:
+  jwt:
+    # for prod: DO NOT set a default; force it via secret
+    secret: ${APP_JWT_SECRET}
+  storage:
+    root: ${APP_STORAGE_ROOT:/var/app/uploads}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
