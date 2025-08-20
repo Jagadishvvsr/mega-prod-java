@@ -23,7 +23,7 @@ jobs:
     - name: checkout code
       uses: actions/checkout@v4
     - name: Set up JDK 17
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'temurin'
@@ -38,7 +38,7 @@ jobs:
       run: mvn -B clean package
 
     - name: Upload a Build Artifact
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v4
       with: 
         name: mega-prod-java.jar
         path: target/*.jar
@@ -48,7 +48,7 @@ jobs:
 
     - name: upload test reports
       if: always()
-      uses : actions/upload-artifact@v1.0.0
+      uses : actions/upload-artifact@v4
       with:
        name: test reports
        path: |
