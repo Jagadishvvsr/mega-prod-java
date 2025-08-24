@@ -47,8 +47,8 @@ pipeline{
         always{
           junit allowEmptyResults: true, testResults: '**/target/failsafe-reports/*.xml'
           // publish coverage from all .exec files produced by Maven/JaCoCo
-          jacoco execPattern: '**/jacoco*.exec'
-          // archive pretty HTML reports (if your POM generates them)
+           recordCoverage tools: [jacoco(pattern: '**/target/site/jacoco*/jacoco.xml')],
+                     sourceFileResolver: sourceFiles('STORE_ALL_BUILD')
            archiveArtifacts artifacts: '**/target/site/jacoco*/**',
                         allowEmptyArchive: true, fingerprint: true
         }
