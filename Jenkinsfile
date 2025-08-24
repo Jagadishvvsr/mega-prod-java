@@ -41,12 +41,12 @@ pipeline{
     stage('integration test and code coverage'){
       steps{
         sh 'mvn -DskipTests -DskipITs=false verify'
-        jacoco execPattern: 'target/jacoco.exec' // Collect code coverage data
+        jacoco execPattern: 'target/site/jacoco/**' // Collect code coverage data
       }
       post{
         always{
           junit 'target/failsafe-reports/*.xml'
-          archiveArtifacts artifacts: 'target/site/jacoco/**'
+          archiveArtifacts artifacts: 'target/**.exec'
         }
       }
     }
