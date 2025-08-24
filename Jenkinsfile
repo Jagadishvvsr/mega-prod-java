@@ -47,10 +47,9 @@ pipeline{
         always{
           junit allowEmptyResults: true, testResults: '**/target/failsafe-reports/*.xml'
           // publish coverage from all .exec files produced by Maven/JaCoCo
-           recordCoverage tools: [jacoco(pattern: '**/target/site/jacoco*/jacoco.xml')],
-                     sourceFileResolver: sourceFiles('STORE_ALL_BUILD')
-           archiveArtifacts artifacts: '**/target/site/jacoco*/**',
-                        allowEmptyArchive: true, fingerprint: true
+          recordCoverage tools: [jacoco(pattern: '**/target/site/jacoco*/jacoco.xml')]
+          archiveArtifacts artifacts: '**/target/site/jacoco*/**', allowEmptyArchive: true, fingerprint: true
+        }
         }
       }
     }
