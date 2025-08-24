@@ -41,7 +41,7 @@ pipeline{
     stage('integration test and code coverage'){
       steps{
         // run ITs only (don’t re-run unit tests)
-        sh 'mvn -q -DskipTests -DskipITs=false verify'
+        sh 'mvn -B -DskipTests=false verify'
       }
       post{
         always{
